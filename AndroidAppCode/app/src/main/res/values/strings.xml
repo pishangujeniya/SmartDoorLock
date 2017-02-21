@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Door Lock</string>
+    <string name="Complete">Connected</string>
+    <string name="Error">Error</string>
+    <string name="Upload">Connect</string>
+    <string name="GetStatus">Get Status</string>
+    <string name="Got">Status Updated</string>
+    <string name="title_activity_show_history">ShowHistory</string>
+</resources>

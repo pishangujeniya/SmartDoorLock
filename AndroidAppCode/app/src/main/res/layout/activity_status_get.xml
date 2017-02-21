@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_status_get"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.pishang.pishanggui.StatusGet">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/openlock"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="20dp"
+        android:id="@+id/imageView"
+        android:layout_below="@+id/statusgetting"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <com.dd.CircularProgressButton
+        android:id="@+id/statusgetting"
+        android:layout_width="196dp"
+        android:layout_height="64dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:cpb_textComplete="@string/Got"
+        app:cpb_textError="@string/Error"
+        app:cpb_textIdle="@string/GetStatus"
+        android:onClick="StatusGetting"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <!--<com.dd.CircularProgressButton-->
+        <!--android:id="@+id/statusgetting"-->
+        <!--android:layout_width="196dp"-->
+        <!--android:layout_height="64dp"-->
+        <!--android:layout_marginTop="25dp"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="18sp"-->
+        <!--app:cpb_textComplete="@string/Got"-->
+        <!--app:cpb_textError="@string/Error"-->
+        <!--app:cpb_textIdle="@string/GetStatus"-->
+        <!--android:onClick="StatusGetting"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_centerHorizontal="true" />-->
+
+
+</RelativeLayout>
