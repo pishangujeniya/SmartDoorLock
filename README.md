@@ -8,7 +8,7 @@ This project is developed  by
 
 	PISHANGKUMAR UJENIYA	
 	(IT-99)	(13ITUBS007)
-	(pishangujeniya@gmail.com)
+	(pishangujeniya@outlook.com)
 
 	MOHIB SORATHIA	
 	(IT-91)	(13ITUOS058)	
@@ -75,7 +75,7 @@ Source Code Archive contents:
 ---------------------------------------------------
 ---------------------------------------------------
 
-README.txt file Last updated on 20th November, 2016
+README.txt file Last updated on 4th November, 2018
 
 ---------------------------------------------------
 ---------------------------------------------------
