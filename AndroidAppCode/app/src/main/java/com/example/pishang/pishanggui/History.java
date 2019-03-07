@@ -2,8 +2,8 @@ package com.example.pishang.pishanggui;
 
 import android.database.Cursor;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -28,7 +28,7 @@ public class History extends AppCompatActivity {
         tr_head.setId(10);
         tr_head.setBackgroundColor(Color.GRAY);
         tr_head.setLayoutParams(new TableLayout.LayoutParams(
-                TableLayout.LayoutParams.WRAP_CONTENT,TableLayout.LayoutParams.WRAP_CONTENT
+                TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT
         ));
 
         TextView label_date = new TextView(this);
@@ -52,22 +52,21 @@ public class History extends AppCompatActivity {
 
         Cursor res = mydb.getdata();
 
-        if(res.getCount()==0){
-            Toast.makeText(getApplicationContext(),"NO DATA FOUND",Toast.LENGTH_SHORT).show();
+        if (res.getCount() == 0) {
+            Toast.makeText(getApplicationContext(), "NO DATA FOUND", Toast.LENGTH_SHORT).show();
             return;
         }
 
 
-
-        Integer count=0;
+        Integer count = 0;
 
         while (res.moveToNext()) {
             String date = res.getString(1);  // get the first variable
             String task = res.getString(2);// get the second variable
 // Create the table row
             TableRow tr = new TableRow(this);
-            if(count%2!=0) tr.setBackgroundColor(Color.LTGRAY);
-            tr.setId(100+count);
+            if (count % 2 != 0) tr.setBackgroundColor(Color.LTGRAY);
+            tr.setId(100 + count);
             tr.setLayoutParams(new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.WRAP_CONTENT,
                     TableLayout.LayoutParams.WRAP_CONTENT));
@@ -75,13 +74,13 @@ public class History extends AppCompatActivity {
 //Create two columns to add as table data
             // Create a TextView to add date
             TextView labelDATE = new TextView(this);
-            labelDATE.setId(200+count);
+            labelDATE.setId(200 + count);
             labelDATE.setText(date);
             labelDATE.setPadding(2, 0, 5, 0);
             labelDATE.setTextColor(Color.BLACK);
             tr.addView(labelDATE);
             TextView labelWEIGHT = new TextView(this);
-            labelWEIGHT.setId(200+count);
+            labelWEIGHT.setId(200 + count);
             labelWEIGHT.setText(task);
             labelWEIGHT.setTextColor(Color.BLUE);
             tr.addView(labelWEIGHT);
@@ -94,10 +93,9 @@ public class History extends AppCompatActivity {
         }
 
 
-
     }
 
-    public void deletedata(View v){
+    public void deletedata(View v) {
 
         mydb.deletedata();
 

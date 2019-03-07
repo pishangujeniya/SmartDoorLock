@@ -2,10 +2,9 @@ package com.example.pishang.pishanggui;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.Button;
 
 import com.zl.reik.dilatingdotsprogressbar.DilatingDotsProgressBar;
 
@@ -15,13 +14,10 @@ public class MainActivity extends AppCompatActivity {
     public BluetoothAdapter BA;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
 
         BA = BluetoothAdapter.getDefaultAdapter();
@@ -31,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 // show progress bar and start animating
         mDilatingDotsProgressBar.showNow();
 
-        if (BA.isEnabled()){
+        if (BA.isEnabled()) {
 
             BA.disable();
 
@@ -44,17 +40,13 @@ public class MainActivity extends AppCompatActivity {
                     //Do something after 100ms
 //                    mDilatingDotsProgressBar.hideNow();
 
-                    Intent i = new Intent(MainActivity.this,Connect.class);
+                    Intent i = new Intent(MainActivity.this, Connect.class);
                     startActivity(i);
                 }
             }, 1500);
 
 
-
-
-        }
-        else
-        {
+        } else {
 
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -63,9 +55,8 @@ public class MainActivity extends AppCompatActivity {
                     //Do something after 100ms
 //                    mDilatingDotsProgressBar.hideNow();
 
-                    Intent i = new Intent(MainActivity.this,Connect.class);
+                    Intent i = new Intent(MainActivity.this, Connect.class);
                     startActivity(i);
-
 
 
                 }
