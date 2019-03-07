@@ -3,11 +3,11 @@ package com.example.pishang.pishanggui;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,6 +47,25 @@ public class ToUnlock extends AppCompatActivity {
     DatabaseHelper mydb;
 
     Button tounlockhistorybutton;
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            byte[] writeBuf = (byte[]) msg.obj;
+            int begin = (int) msg.arg1;
+            int end = (int) msg.arg2;
+            switch (msg.what) {
+                case 1:
+                    String writeMessage = new String(writeBuf);
+                    writeMessage = writeMessage.substring(begin, end);
+//                    Toast.makeText(getApplicationContext(),writeMessage,Toast.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(android.R.id.content), writeMessage, Snackbar.LENGTH_LONG).show();
+                    if (writeMessage.length() == 8) {
+                        ivopen.setVisibility(View.VISIBLE);
+                    }
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,53 +75,50 @@ public class ToUnlock extends AppCompatActivity {
 
         mydb = new DatabaseHelper(this);
 
-        tounlockhistorybutton = (Button)findViewById(R.id.tounlockhistorybutton);
+        tounlockhistorybutton = (Button) findViewById(R.id.tounlockhistorybutton);
 
         Globalshare mApp = ((Globalshare) getApplicationContext());
         btSocket = mApp.getGlobalSocketValue();
 
-        Button b5 = (Button)findViewById(R.id.button5); //OPENKAR Button
-        pass = (EditText)findViewById(R.id.editText3);
+        Button b5 = (Button) findViewById(R.id.button5); //OPENKAR Button
+        pass = (EditText) findViewById(R.id.editText3);
 
-        BA =  BluetoothAdapter.getDefaultAdapter();
-        ivopen = (ImageView)findViewById(R.id.openlockiv);
+        BA = BluetoothAdapter.getDefaultAdapter();
+        ivopen = (ImageView) findViewById(R.id.openlockiv);
         ivopen.setVisibility(View.INVISIBLE);
-
 
 
     }
 
-    public void tounlockhistory(View v){
+    public void tounlockhistory(View v) {
 
-        Intent showhistory = new Intent(ToUnlock.this,History.class);
+        Intent showhistory = new Intent(ToUnlock.this, History.class);
         startActivity(showhistory);
 
     }
 
     public void exitapp(View v) {
 
-        try{
+        try {
             btSocket.close();
             BA.disable();
             this.finishAffinity();
             finish();
             System.exit(0);
-        }catch (Exception e)
-        {
-            Toast.makeText(getApplicationContext(),"Socket Closing error",Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Socket Closing error", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    public void openkar (View v) {
+    public void openkar(View v) {
 
         // DATABASE MA ENTRY MARVANO MODULE
         dt = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
-        boolean isinserted = mydb.insertdata(dt,"OPENED");
-        if(isinserted = true){
+        boolean isinserted = mydb.insertdata(dt, "OPENED");
+        if (isinserted = true) {
 //            Toast.makeText(getApplicationContext(),"INSERTED",Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
 //            Toast.makeText(getApplicationContext(),"NOT INSERTED",Toast.LENGTH_SHORT).show();
         }
 
@@ -110,7 +126,7 @@ public class ToUnlock extends AppCompatActivity {
 
 
         pulvalue = pass.getText().toString();
-        OPENCOMMAND = "OPEN="+pulvalue+"\n";
+        OPENCOMMAND = "OPEN=" + pulvalue + "\n";
 
         if (btSocket != null) {
             ct = new ConnectedThread(btSocket);
@@ -119,7 +135,7 @@ public class ToUnlock extends AppCompatActivity {
             ct.write(OPENCOMMAND);
 
         } else {
-            Toast.makeText(getApplicationContext(),"Socket Failed",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Socket Failed", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -129,6 +145,7 @@ public class ToUnlock extends AppCompatActivity {
         private final InputStream mmInStream;
         private final OutputStream mmOutStream;
         byte[] buffer = new byte[1024];
+
         public ConnectedThread(BluetoothSocket socket) {
             mmSocket = socket;
             InputStream tmpIn = null;
@@ -136,10 +153,12 @@ public class ToUnlock extends AppCompatActivity {
             try {
                 tmpIn = socket.getInputStream();
                 tmpOut = socket.getOutputStream();
-            } catch (IOException e) { }
+            } catch (IOException e) {
+            }
             mmInStream = tmpIn;
             mmOutStream = tmpOut;
         }
+
         public void run() {
 
             int begin = 0;
@@ -147,11 +166,11 @@ public class ToUnlock extends AppCompatActivity {
             while (true) {
                 try {
                     bytes += mmInStream.read(buffer, bytes, buffer.length - bytes);
-                    for(int i = begin; i < bytes; i++) {
-                        if(buffer[i] == "\n".getBytes()[0]) {
+                    for (int i = begin; i < bytes; i++) {
+                        if (buffer[i] == "\n".getBytes()[0]) {
                             mHandler.obtainMessage(1, begin, i, buffer).sendToTarget();
                             begin = i + 1;
-                            if(i == bytes - 1) {
+                            if (i == bytes - 1) {
                                 bytes = 0;
                                 begin = 0;
                             }
@@ -180,23 +199,4 @@ public class ToUnlock extends AppCompatActivity {
             }
         }
     }
-    Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            byte[] writeBuf = (byte[]) msg.obj;
-            int begin = (int)msg.arg1;
-            int end = (int)msg.arg2;
-            switch(msg.what) {
-                case 1:
-                    String writeMessage = new String(writeBuf);
-                    writeMessage = writeMessage.substring(begin, end);
-//                    Toast.makeText(getApplicationContext(),writeMessage,Toast.LENGTH_SHORT).show();
-                    Snackbar.make(findViewById(android.R.id.content),writeMessage, Snackbar.LENGTH_LONG).show();
-                    if(writeMessage.length() == 8){
-                        ivopen.setVisibility(View.VISIBLE);
-                    }
-                    break;
-            }
-        }
-    };
 }
