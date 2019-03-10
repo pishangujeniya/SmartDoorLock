@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.pishang.pishanggui.StatusGet">
+    tools:context="com.pishangujeniya.SmartDoorLock.pishanggui.com.pishangujeniya.pishang.StatusGet">
 
     <ImageView
         android:id="@+id/imageView"
@@ -28,24 +28,24 @@
         android:layout_height="64dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:onClick="StatusGetting"
-        android:textColor="@color/white"
         android:background="@color/colorPrimary"
+        android:onClick="StatusGetting"
         android:text="Get Status"
-        android:textSize="18sp"/>
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
     <!--<com.dd.CircularProgressButton-->
-        <!--android:id="@+id/statusgetting"-->
-        <!--android:layout_width="196dp"-->
-        <!--android:layout_height="64dp"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:onClick="StatusGetting"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:textSize="18sp"-->
-        <!--app:cpb_textComplete="@string/Got"-->
-        <!--app:cpb_textError="@string/Error"-->
-        <!--app:cpb_textIdle="@string/GetStatus" />-->
+    <!--android:id="@+id/statusgetting"-->
+    <!--android:layout_width="196dp"-->
+    <!--android:layout_height="64dp"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:onClick="StatusGetting"-->
+    <!--android:textColor="@color/white"-->
+    <!--android:textSize="18sp"-->
+    <!--app:cpb_textComplete="@string/Got"-->
+    <!--app:cpb_textError="@string/Error"-->
+    <!--app:cpb_textIdle="@string/GetStatus" />-->
 
     <!--<com.dd.CircularProgressButton-->
     <!--android:id="@+id/statusgetting"-->
