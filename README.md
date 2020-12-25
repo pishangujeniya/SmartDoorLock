@@ -1,6 +1,9 @@
 # SmartDoorLock
 Smart Door Lock System using Arduino UNO Board and Lock Mechanism work on Password protection using wireless bluetooth connection through Android Application on Phone
 
+[![Demo Video](https://i.imgur.com/Q7Q8Ibt.png)](https://github.com/pishangujeniya/SmartDoorLock/raw/master/Report-Documentation/Smart_Door_Lock_System.mp4)
+
+[Demo Video](https://github.com/pishangujeniya/SmartDoorLock/raw/master/Report-Documentation/Smart_Door_Lock_System.mp4)
 
 README------SMART-DOOR-LOCK-SYSTEM---------------
 
